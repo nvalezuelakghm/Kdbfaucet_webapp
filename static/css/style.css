@@ -1,5 +1,84 @@
+/* static/css/style.css */
+.container {
+    width: 80%;
+    margin: 0 auto;
+    padding: 50px 0;
+    text-align: center;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.password-input {
+    width: 95%;
+    padding: 8px;
+    margin-top: 5px;
+}
+
+.password-strength {
+    height: 10px;
+    width: 100%;
+    background-color: #ddd;
+    margin-top: 10px;
+    border-radius: 5px;
+}
+
+.password-strength-meter {
+    height: 100%;
+    border-radius: 5px;
+}
+
 h1 {
-  text-align: center;
-  font-family: "Source Sans Pro", sans-serif;
-  font-weight: normal;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.password-info {
+    font-size: 18px;
+    margin-bottom: 15px;
+}
+
+.note {
+    color: #555;
+    margin-bottom: 20px;
+}
+
+.password-link {
+    display: inline-block;
+    background-color: #007bff;
+    color: #ffffff;
+    padding: 12px 24px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background-color 0.3s;
+}
+
+.password-link:hover {
+    background-color: #0056b3;
+}
+
+.link-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.copy-btn {
+    margin-left: 10px;
+    padding: 10px 15px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.copy-btn:hover {
+    background-color: #218838;
 }

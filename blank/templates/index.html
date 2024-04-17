@@ -2,11 +2,38 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h1>Create a One-Time Password Link</h1>
-<form method="post" action="{% url 'create_link' %}">
-    {% csrf_token %}
-    <label for="password">Enter Password:</label>
-    <input type="password" id="password" name="password" required>
-    <button type="submit">Create Link</button>
-</form>
+<div class="container">
+    <h1>Create a One-Time Password Link</h1>
+    <form method="post" action="{% url 'create_link' %}" id="passwordForm">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="password">Enter Password:</label>
+            <input type="password" id="password" name="password" class="password-input" required>
+            <small id="passwordHelp" class="form-text text-muted">Strength level</small>
+        </div>
+        <div class="password-strength" id="passwordStrength"></div>
+        <button type="submit" class="btn btn-primary">Create Link</button>
+    </form>
+</div>
+<script>
+document.getElementById('password').addEventListener('input', function() {
+    const password = this.value;
+    const strengthMeter = document.getElementById('passwordStrength');
+    const strengths = {
+        0: "#ff3e36",
+        1: "#ff691f",
+        2: "#ffda36",
+        3: "#0be881"
+    };
+    let strengthValue = 0;
+    
+    if (password.length > 5) strengthValue++;
+    if (password.match(/[a-z]/) && password.match(/[A-Z]/)) strengthValue++;
+    if (password.match(/[0-9]/)) strengthValue++;
+    if (password.match(/[^a-zA-Z\d]/)) strengthValue++;
+
+    strengthMeter.style.width = (strengthValue / 4) * 100 + '%';
+    strengthMeter.style.backgroundColor = strengths[strengthValue] || strengths[0];
+});
+</script>
 {% endblock %}

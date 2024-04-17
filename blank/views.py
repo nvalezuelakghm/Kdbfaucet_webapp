@@ -25,8 +25,7 @@ def show_password(request, uuid):
         password = link.password
         link.is_active = False
         link.save()
-        return HttpResponse(f"Password: {password}")
+        return render(request, 'password_display.html', {'password': password})
     except PasswordLink.DoesNotExist:
         return HttpResponse("This link has expired or is invalid.")
-
 
