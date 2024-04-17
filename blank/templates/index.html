@@ -9,31 +9,42 @@
         <div class="form-group">
             <label for="password">Enter Password:</label>
             <input type="password" id="password" name="password" class="password-input" required>
-            <small id="passwordHelp" class="form-text text-muted">Strength level</small>
         </div>
-        <div class="password-strength" id="passwordStrength"></div>
-        <button type="submit" class="btn btn-primary">Create Link</button>
+        <div class="password-strength" id="passwordStrength">
+            <span id="strengthText" class="strength-text"></span>
+        </div>
+        <div class="password-tips">
+            <p>Recommendations for a strong password:</p>
+            <ul>
+                <li>At least 8 characters long</li>
+                <li>Uses both upper and lower case letters</li>
+                <li>Includes numbers and symbols</li>
+            </ul>
+        </div>
+        <button type="submit" class="create-btn">Create Link</button>
     </form>
 </div>
 <script>
 document.getElementById('password').addEventListener('input', function() {
     const password = this.value;
     const strengthMeter = document.getElementById('passwordStrength');
+    const strengthText = document.getElementById('strengthText');
     const strengths = {
-        0: "#ff3e36",
-        1: "#ff691f",
-        2: "#ffda36",
-        3: "#0be881"
+        0: { color: "#ff3e36" },   // Red for the weakest level
+        1: { color: "#ff691f", text: "Weak" },       // Orange for weak
+        2: { color: "#ffda36", text: "Moderate" },   // Yellow for moderate
+        3: { color: "#0be881", text: "Strong" }      // Green for strong
     };
     let strengthValue = 0;
-    
-    if (password.length > 5) strengthValue++;
-    if (password.match(/[a-z]/) && password.match(/[A-Z]/)) strengthValue++;
-    if (password.match(/[0-9]/)) strengthValue++;
-    if (password.match(/[^a-zA-Z\d]/)) strengthValue++;
+
+    if (password.length > 0) strengthValue++;  // Check if password length is greater than 8
+    if (password.match(/[a-z]/) && password.match(/[A-Z]/)) strengthValue++;  // Check for mixed case letters
+    if (password.match(/[0-9]/)) strengthValue++;  // Check for inclusion of numbers
+    if (password.match(/[^a-zA-Z\d]/)) strengthValue++;  // Check for inclusion of special characters
 
     strengthMeter.style.width = (strengthValue / 4) * 100 + '%';
-    strengthMeter.style.backgroundColor = strengths[strengthValue] || strengths[0];
+    strengthMeter.style.backgroundColor = strengths[strengthValue].color;
+    strengthText.textContent = strengths[strengthValue].text;
 });
 </script>
 {% endblock %}

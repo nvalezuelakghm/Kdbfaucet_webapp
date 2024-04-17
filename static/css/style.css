@@ -20,11 +20,19 @@
 }
 
 .password-strength {
-    height: 10px;
+    position: relative; /* Needed for absolute positioning of text */
     width: 100%;
     background-color: #ddd;
-    margin-top: 10px;
+    margin-bottom: 10px;  /* Spacing between the bar and the tips */
+    height: 20px; /* Ensure there's room for text */
     border-radius: 5px;
+}
+
+.strength-text {
+    position: absolute;
+    left: 10px;  /* Position inside the bar */
+    color: white;  /* Make the text color stand out */
+    font-weight: bold;
 }
 
 .password-strength-meter {
@@ -79,6 +87,36 @@ h1 {
     font-weight: bold;
 }
 
+.create-btn {
+    margin-left: 10px;
+    padding: 10px 15px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
 .copy-btn:hover {
     background-color: #218838;
+}
+
+.password-tips {
+    margin-bottom: 20px;  /* Spacing between the tips and the button */
+    background-color: #f8f9fa;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-size: 0.9rem;
+}
+
+.password-tips ul {
+    padding-left: 50px;
+    text-align: left;
+}
+
+.password-tips p {
+    margin-bottom: 5px;
+    font-weight: bold;
 }
