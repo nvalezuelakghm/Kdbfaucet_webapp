@@ -5,12 +5,16 @@
     <h1>Create a One-Time Password Link</h1>
     <form method="post" action="{% url 'create_link' %}" id="passwordForm">
         {% csrf_token %}
-        <div class="form-group">
-            <label for="password">Enter Password:</label>
-            <input type="password" id="password" name="password" class="password-input" required>
-            
-            <button type="button" id="generatePassword" class="create-pass" style="margin-top: 10px;">or create one</button>
-            <span id="generatedPasswordPreview" style="margin-left: 10px; font-style: italic;"></span> <!-- Added preview span -->
+        <div class="form-group" style="display: flex; align-items: center;">
+            <label for="password" style="margin-right: 10px;">Enter Password:</label>
+            <div style="display: flex; align-items: center; flex-grow: 1;">
+                <input type="password" id="password" name="password" class="password-input" required style="flex-grow: 1;">
+                <button type="button" onclick="togglePassword()" class="toggle-password-btn" style="background: none; border: none; margin-top: 5px;">
+                    <img src="static/eye_icon.png" alt="Show/Hide password" style="height: 20px; cursor: pointer;">
+                </button>
+            </div>
+            <button type="button" id="generatePassword" class="create-pass" style="margin-left: 10px;">or create one</button>
+            <span id="generatedPasswordPreview" style="margin-left: 10px; font-style: italic;"></span>
         </div>
         <div class="password-strength" id="passwordStrength">
             <span id="strengthText" class="strength-text"></span>
@@ -27,16 +31,22 @@
     </form>
 </div>
 <script>
+function togglePassword() {
+    var passwordInput = document.getElementById('password');
+    var passwordType = passwordInput.type === 'password' ? 'text' : 'password';
+    passwordInput.type = passwordType;
+}
+
 document.getElementById('password').addEventListener('input', function() {
     const password = this.value;
     const strengthMeter = document.getElementById('passwordStrength');
     const strengthText = document.getElementById('strengthText');
     const strengths = {
         0: "Too short",
-        1: { color: "#ff3e36", text: "Weak" },       // Red for weak
-        2: { color: "#ff691f", text: "Moderate" },   // Orange for moderate
-        3: { color: "#ffda36", text: "Moderate" },   // Yellow for moderate
-        4: { color: "#0be881", text: "Strong" }      // Green for strong
+        1: { color: "#ff3e36", text: "Weak" },
+        2: { color: "#ff691f", text: "Moderate" },
+        3: { color: "#ffda36", text: "Moderate" },
+        4: { color: "#0be881", text: "Strong" }
     };
     let strengthValue = 0;
 
@@ -57,13 +67,21 @@ document.getElementById('generatePassword').addEventListener('click', function()
 
     for (let i = 0; i < passwordLength; i++) {
         const randomNumber = Math.floor(Math.random() * chars.length);
-        password += chars.substring(randomNumber, randomNumber +1);
+        password += chars.substring(randomNumber, randomNumber + 1);
     }
 
     document.getElementById('password').value = password;
-    document.getElementById('generatedPasswordPreview').textContent = password; // Update the preview span with the generated password
-    // Trigger the input event listener to update the strength meter
+    document.getElementById('generatedPasswordPreview').textContent = password;
     document.getElementById('password').dispatchEvent(new Event('input'));
 });
+</script>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-HDP06W68BX"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-HDP06W68BX');
 </script>
 {% endblock %}
