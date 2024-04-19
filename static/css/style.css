@@ -131,3 +131,13 @@ h1 {
   font-weight: bold; /* This makes the text bold */
 }
 
+.create-pass {
+    margin-left: 10px;
+    padding: 10px 15px;
+    background-color: #2846a7;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+}
