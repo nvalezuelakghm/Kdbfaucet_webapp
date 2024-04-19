@@ -141,3 +141,11 @@ h1 {
     cursor: pointer;
     font-weight: bold;
 }
+
+.warning {
+    font-family: Arial;
+    font-weight: bold;
+    font-style: italic;
+    font-size: 20px;
+    color: #d24a3b;
+}
