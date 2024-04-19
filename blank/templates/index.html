@@ -10,6 +10,7 @@
             <input type="password" id="password" name="password" class="password-input" required>
             
             <button type="button" id="generatePassword" class="create-pass" style="margin-top: 10px;">or create one</button>
+            <span id="generatedPasswordPreview" style="margin-left: 10px; font-style: italic;"></span> <!-- Added preview span -->
         </div>
         <div class="password-strength" id="passwordStrength">
             <span id="strengthText" class="strength-text"></span>
@@ -50,7 +51,7 @@ document.getElementById('password').addEventListener('input', function() {
 });
 
 document.getElementById('generatePassword').addEventListener('click', function() {
-    const chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_+{}:"<>?|[];\',./`~';
+    const chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%&*?';
     let password = '';
     const passwordLength = 12; // Generate 12 characters long passwords for better security
 
@@ -60,6 +61,7 @@ document.getElementById('generatePassword').addEventListener('click', function()
     }
 
     document.getElementById('password').value = password;
+    document.getElementById('generatedPasswordPreview').textContent = password; // Update the preview span with the generated password
     // Trigger the input event listener to update the strength meter
     document.getElementById('password').dispatchEvent(new Event('input'));
 });
